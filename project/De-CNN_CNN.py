@@ -46,11 +46,11 @@ class EEGClassifier(nn.Module):
         self.deconv = nn.Sequential(
             nn.ConvTranspose2d(1, 512, kernel_size=(3, 3), stride=2),
             nn.ReLU(),
-            nn.ConvTranspose2d(512, 32, kernel_size=(3, 3), stride=2),  # Additional layer
+            nn.ConvTranspose2d(512, final_layer_size, kernel_size=(3, 3), stride=2),  # Additional layer
             nn.ReLU(),
             # Add more layers as necessary
         )
-        self.reduce_channels = nn.Conv2d(32, 3, kernel_size=(1, 1))  # Reduce to 3 channels to fit EfficientNet input
+        self.reduce_channels = nn.Conv2d(final_layer_size, 3, kernel_size=(1, 1))  # Reduce to 3 channels to fit EfficientNet input
 
         # Load a pre-trained EfficientNet model
         self.efficient_net = models.efficientnet_b0(pretrained=True)
@@ -89,12 +89,14 @@ optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 print("\n\n\nNumber of test samples:", test_data_length, "\n")
 print("Starting Training\n")
 batchesPerEpoch = int(test_data_length/32)
-print("Batches completed per Epoch: ",  batchesPerEpoch)
+print("Batches per Epoch: ",  batchesPerEpoch)
 
 totalTrainingTimeStart = time.time()
-epochs = 2
+epochs = 3
 numberOfDisplays = 6
 batchesPerDisplay = int(batchesPerEpoch/numberOfDisplays)
+if(batchesPerDisplay == 0):
+    batchesPerDisplay = 1
 print("Number of Epochs: ", epochs,"\n")
 for epoch in range(epochs):
     total_correct = 0
@@ -151,7 +153,7 @@ total_samples = 0
 
 # Disable gradient computation for evaluation to save memory and computations
 testingTimeStart = time.time()
-testingRunCount = 0
+testingRunBatchesCount = 0
 print("\n\nStarting Testing\n")
 
 
@@ -161,17 +163,17 @@ with torch.no_grad():
 
         # Forward pass
         outputs = model(data)
-        testingRunCount += 1
-        if(testingRunCount % 500 == 0):
-            print("Testing Run: ", testingRunCount)
-       
+        testingRunBatchesCount += 1
+        if(testingRunBatchesCount % 500 == 0):
+            print("Data tested: ", testingRunBatchesCount*32)
+        
         # Get predictions and update test accuracy
         _, predicted = outputs.max(1)
         class_indices = labels.max(dim=1)[1]  # Assuming labels are one-hot encoded
         total_correct += (predicted == class_indices).sum().item()
         total_samples += labels.size(0)
 
-        if(testingRunCount == 2500):
+        if(testingRunBatchesCount == 10000):# Will never break if over 2000
             print("\nBreaking out of loop\n")
             break
 

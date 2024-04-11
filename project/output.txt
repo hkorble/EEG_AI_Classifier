@@ -1,39 +1,49 @@
-Number of test samples: 80000 
+Number of test samples: 84000 
 
 Starting Training
 
-Batches completed per Epoch:  2500
-Number of Epochs:  2
+Batches completed per Epoch:  2625
+Number of Epochs:  3
 
-Batches this Epoch:  416
-Batches this Epoch:  832
-Batches this Epoch:  1248
-Batches this Epoch:  1664
-Batches this Epoch:  2080
-Batches this Epoch:  2496
+Batches this Epoch:  437
+Batches this Epoch:  874
+Batches this Epoch:  1311
+Batches this Epoch:  1748
+Batches this Epoch:  2185
+Batches this Epoch:  2622
 
-Epoch [1/2], Loss: 0.3005, Accuracy: 75.26%
-Time taken for this Epoch:  3732.070378303528
+Epoch [1/3], Loss: 0.1524, Accuracy: 86.05%
+Time taken for this Epoch:  1528.6908473968506
 
-Batches this Epoch:  416
-Batches this Epoch:  832
-Batches this Epoch:  1248
-Batches this Epoch:  1664
-Batches this Epoch:  2080
-Batches this Epoch:  2496
+Batches this Epoch:  437
+Batches this Epoch:  874
+Batches this Epoch:  1311
+Batches this Epoch:  1748
+Batches this Epoch:  2185
+Batches this Epoch:  2622
 
-Epoch [2/2], Loss: 0.0672, Accuracy: 90.28%
-Time taken for this Epoch:  3719.11564040184
+Epoch [2/3], Loss: 0.0151, Accuracy: 97.55%
+Time taken for this Epoch:  1518.8555116653442
+
+Batches this Epoch:  437
+Batches this Epoch:  874
+Batches this Epoch:  1311
+Batches this Epoch:  1748
+Batches this Epoch:  2185
+Batches this Epoch:  2622
+
+Epoch [3/3], Loss: 0.0057, Accuracy: 98.68%
+Time taken for this Epoch:  1515.5853552818298
 
 
-Total Training Time:  7451.187018632889
+Total Training Time:  4563.132454156876
 
 
 Starting Testing
 
-Testing Run:  500
-Testing Run:  1000
-Testing Run:  1500
-Test Accuracy: 70.58%, Time taken for testing: 914.91s
+Testing Run:  16000
+Testing Run:  32000
+Testing Run:  48000
+Test Accuracy: 79.12%, Time taken for testing: 424.86s
 
-Full Runtime:  8369.575614213943
+Full Runtime:  4990.2230677604675

@@ -1,6 +1,6 @@
 import load_data as load_data
 
-BATCH_SIZE = 80000
+BATCH_SIZE = 84000
 # return DataSet class
 data = load_data.read_data_sets(one_hot=True)
 
